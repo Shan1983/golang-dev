@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  db:
+    container_name: ${APP_NAME}_db
+    # restart: always
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${APP_NAME}
+      POSTGRES_PASSWORD: pa55word
+      POSTGRES_DB: ${APP_NAME}
+  go_dev:
+    build: .
+    container_name: golang_container
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/home/app
